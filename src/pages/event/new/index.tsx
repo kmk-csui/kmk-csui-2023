@@ -5,4 +5,3 @@ import { CreateEventModule } from "@/components/modules/EventModule/module-eleme
 const CreateEvent: NextPage = () => <CreateEventModule />;
 
 export default CreateEvent;
-// kmk
