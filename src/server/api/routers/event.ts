@@ -31,4 +31,28 @@ export const eventRouter = createTRPCRouter({
         console.error("Error creating Event:", error);
       }
     }),
+
+  getAllEvents: publicProcedure.query(async ({ ctx }) => {
+    return ctx.prisma.event.findMany();
+  }),
+
+  getEventById: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      })
+    )
+    .query(async ({ input: { eventId }, ctx }) => {
+      const event = await ctx.prisma.event.findUnique({
+        where: {
+          id: eventId,
+        },
+      });
+
+      if (!event) {
+        throw new Error(`Event with ID ${eventId} not found`);
+      }
+
+      return event;
+    }),
 });
