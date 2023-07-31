@@ -62,6 +62,7 @@ export const CreateEventModule: React.FC = () => {
         toast.success("Event created succesfully!");
       }
     } catch (error) {
+      console.log(error)
       toast.error("Error, check your input!");
     }
     setIsLoading(false);
