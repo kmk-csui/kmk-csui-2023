@@ -11,8 +11,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <>
-      <Component {...pageProps} />
-      <ToastContainer />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </SessionProvider>
     </>
   );
 };

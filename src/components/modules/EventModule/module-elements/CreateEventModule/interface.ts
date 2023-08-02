@@ -7,8 +7,8 @@ export interface CreateEventForm {
   location: string;
   division: DivisionEnum;
   description: string;
-  link: string;
-  image: FileList;
+  link?: string;
+  image?: FileList;
 }
 
 export enum Division {

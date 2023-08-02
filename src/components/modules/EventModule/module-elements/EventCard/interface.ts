@@ -2,6 +2,7 @@ import { DivisionEnum } from "@prisma/client";
 
 export interface EventCardProps {
   event: IEvent;
+  authStatus: boolean;
 }
 
 export interface IEvent {
@@ -13,5 +14,5 @@ export interface IEvent {
   division: DivisionEnum;
   description: string;
   link: string | null;
-  photo: string;
+  photo: string | null;
 }

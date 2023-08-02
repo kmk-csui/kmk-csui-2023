@@ -13,8 +13,12 @@ import { cfg } from "@/components/config";
 import { api } from "@/utils/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export const CreateEventModule: React.FC = () => {
+  const session = useSession();
+  const router = useRouter();
   const {
     control,
     register,
@@ -36,7 +40,7 @@ export const CreateEventModule: React.FC = () => {
   const onSubmit = async (formData: CreateEventForm) => {
     try {
       setIsLoading(true);
-      const avatarFile = formData.image[0];
+      const avatarFile = formData.image ? formData.image[0] : undefined;
       if (avatarFile) {
         const { data, error } = await cfg.supabase.storage
           .from("event")
@@ -49,20 +53,24 @@ export const CreateEventModule: React.FC = () => {
           setIsLoading(false);
           return;
         }
-        await createEventMutation.mutateAsync({
-          title: formData.name,
-          startDate: formData.start_date.toISOString(),
-          endDate: formData.end_date.toISOString(),
-          location: formData.location,
-          division: formData.division,
-          description: formData.description,
-          link: formData.link,
-          photo: avatarFile.name,
-        });
-        toast.success("Event created succesfully!");
       }
+      await createEventMutation.mutateAsync({
+        title: formData.name,
+        startDate: formData.start_date.toISOString(),
+        endDate: formData.end_date.toISOString(),
+        location: formData.location,
+        division: formData.division,
+        description: formData.description,
+        link: formData.link,
+        ...(avatarFile && { photo: avatarFile.name }),
+      });
+
+      toast.success("Event created succesfully!");
+      setTimeout(() => {
+        router.push("/event");
+      }, 1000);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Error, check your input!");
     }
     setIsLoading(false);
@@ -129,12 +137,12 @@ export const CreateEventModule: React.FC = () => {
             </Select>
 
             <div className="col-span-2">
-              <h4>Foto</h4>
+              <h4>Foto (opsional)</h4>
             </div>
             <div className="col-span-3">
               <FileInput
                 {...register("image", {
-                  required: true,
+                  required: false,
                   validate: (val) => {
                     if (val && val.length > 0 && val[0]) {
                       return val[0].size <
@@ -142,7 +150,6 @@ export const CreateEventModule: React.FC = () => {
                         ? true
                         : `File tidak boleh lebih besar dari ${cfg.MAX_IMG_SIZE_IN_MEGABYTE} MB.`;
                     }
-                    return "File harus dipilih";
                   },
                 })}
                 accept="image/*"
@@ -194,7 +201,11 @@ export const CreateEventModule: React.FC = () => {
             </div>
 
             <div className="col-span-5 mx-auto flex w-[100%] justify-end gap-x-4">
-              <Button disabled={isLoading} type="submit">
+              <Button
+                gradientMonochrome="purple"
+                disabled={isLoading}
+                type="submit"
+              >
                 {isLoading ? <Spinner /> : <h4>Ajukan Kegiatan</h4>}
               </Button>
             </div>
