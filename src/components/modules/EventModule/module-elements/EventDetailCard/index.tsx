@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Badge, Button, Modal } from "flowbite-react";
 import { EventDetailCardProps } from "./interface";
-import { AiOutlineCloseCircle, AiOutlineLink } from "react-icons/ai";
+import {
+  AiFillEdit,
+  AiOutlineCloseCircle,
+  AiOutlineLink,
+} from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DivisionEnum } from "@prisma/client";
@@ -12,6 +16,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
 import { api } from "@/utils/api";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 export const EventDetailCard: React.FC<EventDetailCardProps> = ({
   onClose,
@@ -20,6 +25,7 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
 }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const { status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -91,9 +97,18 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
         <Modal.Body>
           <div className="flex h-fit w-full flex-col gap-x-4 md:gap-x-12">
             {isAuth ? (
-              <div className="flex w-full items-end justify-end">
+              <div className="mb-3 flex w-full items-end justify-end gap-x-3">
                 <Button
                   gradientMonochrome="purple"
+                  onClick={() => router.push(`event/edit?id=${event.id}`)}
+                >
+                  <div className="flex items-center justify-center gap-x-2">
+                    <h1>Edit</h1>
+                    <AiFillEdit />
+                  </div>
+                </Button>
+                <Button
+                  gradientMonochrome="failure"
                   onClick={() => handleDeleteEvent(event.id)}
                 >
                   <div className="flex items-center justify-center gap-x-2">

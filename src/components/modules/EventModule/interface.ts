@@ -1,14 +1,14 @@
 import { DivisionEnum } from "@prisma/client";
 
 export interface CreateEventForm {
-  name: string;
-  start_date: Date;
-  end_date: Date;
+  title: string;
+  startDate: Date | string;
+  endDate: Date | string;
   location: string;
   division: DivisionEnum;
   description: string;
-  link: string;
-  image: FileList;
+  link: string | null;
+  image: FileList | null;
 }
 
 export enum Division {

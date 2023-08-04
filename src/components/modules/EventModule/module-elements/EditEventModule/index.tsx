@@ -6,8 +6,7 @@ import {
   TextInput,
   Textarea,
 } from "flowbite-react";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { CreateEventForm, Division } from "./interface";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { cfg } from "@/components/config";
 import { api } from "@/utils/api";
@@ -15,18 +14,52 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { CreateEventForm, Division } from "../../interface";
+import { IEvent } from "../EventCard/interface";
+import { useQuery } from "@tanstack/react-query";
 
-export const CreateEventModule: React.FC = () => {
+export const EditEventModule: React.FC = () => {
   const session = useSession();
   const router = useRouter();
+  const { id } = router.query;
+  const eventId = typeof id === "string" ? id : "";
+  const [defaultData, setDefaultData] = useState<CreateEventForm | undefined>();
+  const [data, setData] = useState<IEvent | undefined>();
   const {
     control,
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<CreateEventForm>();
+  } = useForm<CreateEventForm>({
+    values: {
+      title: data?.title!,
+      startDate: data?.startDate
+        ? data.startDate.toISOString().slice(0, 16)
+        : "",
+      endDate: data?.endDate ? data.endDate.toISOString().slice(0, 16) : "",
+      location: data?.location!,
+      division: data?.division!,
+      description: data?.description!,
+      link: data?.link!,
+      image: null,
+    },
+  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { data: eventData, error } = api.event.getEventById.useQuery({
+    eventId,
+  });
+
+  useEffect(() => {
+    if (eventId && eventData) {
+      try {
+        setData(eventData);
+        // setDefaultData(eventData as CreateEventForm);
+        console.log(data);
+      } catch {}
+    }
+  }, [eventId, eventData]);
 
   const getEnumKeysAndValues = (e: any) => {
     return Object.keys(e).map((key) => ({
@@ -56,8 +89,8 @@ export const CreateEventModule: React.FC = () => {
       }
       await createEventMutation.mutateAsync({
         title: formData.title,
-        startDate: formData.start_date.toISOString(),
-        endDate: formData.end_date.toISOString(),
+        startDate: formData.startDate.toString(),
+        endDate: formData.endDate.toString(),
         location: formData.location,
         division: formData.division,
         description: formData.description,
@@ -167,7 +200,7 @@ export const CreateEventModule: React.FC = () => {
             </div>
             <div className="col-span-3 w-full">
               <TextInput
-                {...register("start_date", {
+                {...register("startDate", {
                   required: true,
                   valueAsDate: true,
                   validate: (val) =>
@@ -177,7 +210,7 @@ export const CreateEventModule: React.FC = () => {
                 type="datetime-local"
               />
               <p className="text-sm text-red-500">
-                {errors.start_date?.message}
+                {errors.startDate?.message}
               </p>
             </div>
             <div className="col-span-2">
@@ -188,7 +221,7 @@ export const CreateEventModule: React.FC = () => {
             </div>
             <div className="col-span-3 w-full">
               <TextInput
-                {...register("end_date", {
+                {...register("endDate", {
                   required: true,
                   valueAsDate: true,
                   validate: (val) =>
@@ -197,7 +230,7 @@ export const CreateEventModule: React.FC = () => {
                 })}
                 type="datetime-local"
               />
-              <p className="text-sm text-red-500">{errors.end_date?.message}</p>
+              <p className="text-sm text-red-500">{errors.endDate?.message}</p>
             </div>
 
             <div className="col-span-5 mx-auto flex w-[100%] justify-end gap-x-4">

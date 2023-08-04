@@ -65,7 +65,7 @@ export const eventRouter = createTRPCRouter({
       };
     }),
 
-  getEventById: publicProcedure
+  getEventById: protectedProcedure
     .input(
       z.object({
         eventId: z.string(),

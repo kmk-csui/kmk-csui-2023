@@ -8,6 +8,7 @@ export interface EventCardProps {
 export interface IEvent {
   id: string;
   title: string;
+  createdAt: Date;
   startDate: Date;
   endDate: Date;
   location: string;
