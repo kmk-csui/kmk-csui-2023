@@ -44,8 +44,8 @@ export const EventModule: React.FC = () => {
 
   return (
     <>
-      <div className="relative flex min-h-screen flex-col items-center space-y-5 rounded-b-[25px] p-5 md:rounded-b-[100px] lg:rounded-b-[150px] lg:p-32">
-        <h1 className="mb-3 w-full items-center justify-center text-left text-xl font-semibold md:text-3xl lg:text-[50px]">
+      <div className="relative flex min-h-screen flex-col items-center space-y-5 rounded-b-[25px] p-5 pt-24 font-jakarta md:rounded-b-[100px] lg:rounded-b-[150px] lg:p-32">
+        <h1 className="mb-3 w-full items-center justify-center text-left text-2xl font-semibold md:text-3xl lg:text-5xl">
           Event KMK Fasilkom UI
         </h1>
         {data ? (
@@ -56,8 +56,8 @@ export const EventModule: React.FC = () => {
                   gradientMonochrome="purple"
                   onClick={() => router.push("event/new")}
                 >
-                  <div className="flex items-center gap-x-2">
-                    <h4 className="text-lg">Ajukan Kegiatan</h4>
+                  <div className="flex items-center gap-x-2 ">
+                    <h4 className="text-md lg:text-lg">Ajukan Kegiatan</h4>
                     <IoIosCreate size={20} />
                   </div>
                 </Button>

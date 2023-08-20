@@ -36,8 +36,8 @@ export const NavBar: React.FC = () => {
       <Navbar.Collapse className="justify-center">
         <Navbar.Link href="/">Home</Navbar.Link>
         <Navbar.Link href="/event">Event</Navbar.Link>
-        <Navbar.Link href="/blogs">Division</Navbar.Link>
-        <Navbar.Link href="/blogs">Gallery</Navbar.Link>
+        <Navbar.Link href="/division">Division</Navbar.Link>
+        <Navbar.Link href="/gallery">Gallery</Navbar.Link>
         {isAuth ? (
           <Navbar.Link onClick={() => signOut({ callbackUrl: "/" })}>
             Logout

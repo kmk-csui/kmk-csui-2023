@@ -9,7 +9,6 @@ import { MisiContainer } from "./module-elements/container/MisiContainer";
 import { FilosofiContainer } from "./module-elements/container/FilosofiContainer";
 import { MainContentWrapper } from "./module-elements/wrapper/MainContentWrapper";
 import { BannerWrapper } from "./module-elements/wrapper/BannerWrapper";
-import { Footer } from "@/components/elements/Footer";
 
 export const HomeModule: React.FC = () => {
   return (
@@ -87,8 +86,6 @@ export const HomeModule: React.FC = () => {
           </MisiContainer>
         </>
       </MainContentWrapper>
-
-      <Footer />
     </div>
   );
 };

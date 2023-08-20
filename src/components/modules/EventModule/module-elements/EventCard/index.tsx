@@ -62,7 +62,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, authStatus }) => {
   return (
     <>
       <article
-        className="group mb-6 transform cursor-pointer rounded-2xl border border-gray-100 p-4 transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+        className="group mb-6 transform cursor-pointer rounded-2xl border border-gray-100 p-4 font-jakarta transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
         style={{ boxShadow: "1px 1px 10px 1px #8263E8" }}
       >
         <a
@@ -74,14 +74,14 @@ export const EventCard: React.FC<EventCardProps> = ({ event, authStatus }) => {
             <img
               className="h-32 w-full transform rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105"
               src={
-                "https://ssqpcaawnglzgvkghzsj.supabase.co/storage/v1/object/public/event/" +
+                `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/event/` +
                 event.photo
               }
               alt=""
             />
           ) : (
             <div className="flex h-32 w-full transform items-center justify-center rounded-2xl bg-gradient-to-br from-purple-300 to-purple-600 object-cover transition-transform duration-300 group-hover:scale-105">
-              <h1 className="overflow-hidden text-3xl font-bold text-white">
+              <h1 className="overflow-hidden font-jakarta text-3xl font-bold text-white">
                 {getDivisionValue(event.division)}
               </h1>
             </div>
@@ -93,7 +93,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, authStatus }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Lihat Detail Acara{" "}
+            <p className="font-jakarta"> Lihat Detail Acara </p>
             <svg
               className="ml-2 h-6 w-6"
               fill="none"
