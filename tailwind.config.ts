@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        jakarta: ['var(--font-jakarta)'],
+        jakarta: ["var(--font-jakarta)"],
       },
     },
   },

@@ -3,5 +3,5 @@ export interface FilosofiCardProps {
   imgAlt: string;
   illustrationSrc: string;
   illustrationAlt: string;
-  title: string
+  title: string;
 }

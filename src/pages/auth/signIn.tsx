@@ -13,7 +13,7 @@ const SignIn: NextPage = () => {
   });
 
   const onSubmit = useCallback(async (data: ILogin) => {
-    await signIn("credentials", { ...data, callbackUrl: "/dashboard" });
+    await signIn("credentials", { ...data, callbackUrl: "/event" });
   }, []);
 
   const [passwordType, setPasswordType] = useState("password");

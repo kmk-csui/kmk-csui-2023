@@ -9,7 +9,6 @@ import { MisiContainer } from "./module-elements/container/MisiContainer";
 import { FilosofiContainer } from "./module-elements/container/FilosofiContainer";
 import { MainContentWrapper } from "./module-elements/wrapper/MainContentWrapper";
 import { BannerWrapper } from "./module-elements/wrapper/BannerWrapper";
-import { Footer } from "@/components/elements/Footer";
 
 export const HomeModule: React.FC = () => {
   return (
@@ -21,7 +20,7 @@ export const HomeModule: React.FC = () => {
           </div>
         </div>
 
-        <div className="z-50 col-span-2 md:col-span-3">
+        <div className="z-25 col-span-2 md:col-span-3">
           <div className="flex h-full items-center justify-center">
             <div className="relative h-24 w-24 md:h-48 md:w-48">
               <Image
@@ -87,8 +86,6 @@ export const HomeModule: React.FC = () => {
           </MisiContainer>
         </>
       </MainContentWrapper>
-
-      <Footer />
     </div>
   );
 };
