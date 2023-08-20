@@ -5,6 +5,7 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import { plusJakartaSans, inter } from "@/fonts";
+import { NavBar } from "@/components/elements/Navbar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -14,6 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <>
       <SessionProvider session={session}>
         <main className={`${plusJakartaSans.variable} ${inter.variable}`}>
+          <NavBar />
           <Component {...pageProps} />
         </main>
         <ToastContainer />

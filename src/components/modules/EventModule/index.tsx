@@ -3,6 +3,7 @@ import {
   FileInput,
   Pagination,
   Select,
+  Spinner,
   TextInput,
   Textarea,
 } from "flowbite-react";
@@ -44,30 +45,40 @@ export const EventModule: React.FC = () => {
   return (
     <>
       <div className="relative flex min-h-screen flex-col items-center space-y-5 rounded-b-[25px] p-5 md:rounded-b-[100px] lg:rounded-b-[150px] lg:p-32">
-        <h1 className="mb-3 w-full items-center justify-center text-center text-xl font-semibold md:text-3xl lg:text-[50px]">
-          Acara KMK Fasilkom UI
+        <h1 className="mb-3 w-full items-center justify-center text-left text-xl font-semibold md:text-3xl lg:text-[50px]">
+          Event KMK Fasilkom UI
         </h1>
-        <div className="flex w-full items-end justify-end">
-          <Button
-            gradientMonochrome="purple"
-            onClick={() => router.push("event/new")}
-          >
-            <div className="flex items-center gap-x-2">
-              <h4 className="text-lg">Ajukan Kegiatan</h4>
-              <IoIosCreate size={20} />
+        {data ? (
+          <>
+            {isAuth ? (
+              <div className="flex w-full items-end justify-end">
+                <Button
+                  gradientMonochrome="purple"
+                  onClick={() => router.push("event/new")}
+                >
+                  <div className="flex items-center gap-x-2">
+                    <h4 className="text-lg">Ajukan Kegiatan</h4>
+                    <IoIosCreate size={20} />
+                  </div>
+                </Button>
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {eventsData.map((event) => (
+                <EventCard event={event} authStatus={isAuth} />
+              ))}
             </div>
-          </Button>
-        </div>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {eventsData.map((event) => (
-            <EventCard event={event} authStatus={isAuth} />
-          ))}
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          totalPages={totalPages}
-        />
+            <Pagination
+              currentPage={currentPage}
+              onPageChange={onPageChange}
+              totalPages={totalPages}
+            />
+          </>
+        ) : (
+          <Spinner />
+        )}
       </div>
     </>
   );

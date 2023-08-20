@@ -61,7 +61,10 @@ export const EventCard: React.FC<EventCardProps> = ({ event, authStatus }) => {
 
   return (
     <>
-      <article className="group mb-6 transform cursor-pointer rounded-2xl border border-gray-100 p-4 transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+      <article
+        className="group mb-6 transform cursor-pointer rounded-2xl border border-gray-100 p-4 transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+        style={{ boxShadow: "1px 1px 10px 1px #8263E8" }}
+      >
         <a
           onClick={() => setIsOpenEventDetail(true)}
           className="absolute bottom-0 left-0 right-0 top-0 opacity-0"
