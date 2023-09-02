@@ -4,6 +4,9 @@ import { type AppType } from "next/app";
 import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import { ToastContainer } from "react-toastify";
+import { plusJakartaSans, inter } from "@/fonts";
+import { NavBar } from "@/components/elements/Navbar";
+import { Footer } from "@/components/elements/Footer";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -12,7 +15,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <>
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <main className={`${plusJakartaSans.variable} ${inter.variable}`}>
+          <NavBar />
+          <Component {...pageProps} />
+          <Footer />
+        </main>
         <ToastContainer />
       </SessionProvider>
     </>

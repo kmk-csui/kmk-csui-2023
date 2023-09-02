@@ -85,9 +85,9 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
 
   return (
     <>
-      <Modal show={showModal} className="h-screen">
+      <Modal show={showModal} className="h-screen font-jakarta">
         <div className="flex items-center justify-between px-6 pt-5">
-          <h2 className="font-semibold">Detail Acara</h2>
+          <h2 className="text-xl font-semibold">Detail Acara</h2>
           <AiOutlineCloseCircle
             size="28"
             className="cursor-pointer"
@@ -95,7 +95,7 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
           />
         </div>
         <Modal.Body>
-          <div className="flex h-fit w-full flex-col gap-x-4 md:gap-x-12">
+          <div className="flex h-fit w-full flex-col gap-x-4 font-jakarta md:gap-x-12">
             {isAuth ? (
               <div className="mb-3 flex w-full items-end justify-end gap-x-3">
                 <Button
@@ -103,7 +103,7 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
                   onClick={() => router.push(`event/edit?id=${event.id}`)}
                 >
                   <div className="flex items-center justify-center gap-x-2">
-                    <h1>Edit</h1>
+                    <h1 className="font-jakarta">Edit</h1>
                     <AiFillEdit />
                   </div>
                 </Button>
@@ -123,7 +123,7 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
             {event.photo ? (
               <img
                 src={
-                  "https://ssqpcaawnglzgvkghzsj.supabase.co/storage/v1/object/public/event/" +
+                  `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/event/` +
                   event.photo
                 }
                 alt={event.title}
@@ -134,19 +134,19 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
               <></>
             )}
 
-            <div className="flex w-full flex-col space-y-2">
-              <div className="mb-auto flex w-full items-center space-x-3">
+            <div className="flex w-full flex-col space-y-2 font-jakarta">
+              <div className="mb-auto flex w-full items-center space-x-3 font-jakarta">
                 <Badge color="purple">{getDivisionValue(event.division)}</Badge>
                 <Badge color={badgeTimeColor}>{timeInformation}</Badge>
               </div>
 
-              <h3 className="text-xl font-medium leading-8">{event.title}</h3>
+              <h3 className="font-jakarta text-xl">{event.title}</h3>
 
               <div className="flex items-center gap-x-3">
                 <div className="rounded-xl bg-blue-700 p-2">
                   <AiOutlineCalendar size={15} color="white" />
                 </div>
-                <h3 className="text-sm">
+                <h3 className="font-jakarta text-sm">
                   {formatDate(event.startDate)} - {formatDate(event.endDate)}
                 </h3>
               </div>
@@ -155,7 +155,7 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
                 <div className="rounded-xl bg-blue-700 p-2">
                   <FaLocationDot size={15} color="white" />
                 </div>
-                <h3 className="text-sm">{event.location}</h3>
+                <h3 className="font-jakarta text-sm">{event.location}</h3>
               </div>
 
               {event.link ? (
@@ -163,15 +163,15 @@ export const EventDetailCard: React.FC<EventDetailCardProps> = ({
                   <div className="rounded-xl bg-blue-700 p-2">
                     <AiOutlineLink size={15} color="white" />
                   </div>
-                  <a className="text-sm text-purple-800" href={event.link}>
-                    Link Acara
-                  </a>
+                  <h3 className="font-jakarta text-sm text-purple-800">
+                    <a href={event.link}>Link Acara</a>
+                  </h3>
                 </div>
               ) : (
                 <></>
               )}
 
-              <h3 className="w-full break-words text-sm">
+              <h3 className="w-full break-words font-jakarta text-sm">
                 {event.description}
               </h3>
             </div>

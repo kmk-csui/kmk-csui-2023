@@ -6,7 +6,11 @@ export default {
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        jakarta: ["var(--font-jakarta)"],
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 } satisfies Config;

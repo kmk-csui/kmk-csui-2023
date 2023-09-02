@@ -50,6 +50,7 @@ export const CreateEventModule: React.FC = () => {
           });
         if (error) {
           toast.error("Try another image file name!");
+          console.log(error);
           setIsLoading(false);
           return;
         }
@@ -78,9 +79,9 @@ export const CreateEventModule: React.FC = () => {
 
   return (
     <>
-      <div className="relative flex min-h-screen flex-col items-center rounded-b-[25px] md:rounded-b-[100px] lg:rounded-b-[150px] lg:p-32">
+      <div className="relative flex min-h-screen flex-col items-center rounded-b-[25px] px-2 pt-24 font-jakarta md:rounded-b-[100px] lg:rounded-b-[150px] lg:p-32">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-          <h2>Buat Kegiatan</h2>
+          <h2 className="text-2xl font-semibold">Buat Kegiatan</h2>
           <br />
           <div className="flex w-full flex-col justify-items-stretch gap-4 md:grid md:grid-cols-5">
             <div className="col-span-2">
